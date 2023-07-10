@@ -29,11 +29,11 @@ public class SimplesecurityApplication {
                         = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
                 Role adminRole = new Role();
-                adminRole.setAuthority("ROLE_ADMIN");
+                adminRole.setAuthority("ADMIN");
                 adminRole = roleRepository.save(adminRole);
 
                 Role userRole = new Role();
-                userRole.setAuthority("ROLE_USER");
+                userRole.setAuthority("USER");
                 roleRepository.save(userRole);
 
                 User user = new User();
