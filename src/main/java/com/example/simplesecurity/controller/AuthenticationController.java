@@ -14,12 +14,13 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+@CrossOrigin("*")
+public class AuthenticationController {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public AuthController(
+    public AuthenticationController(
             UserRepository userRepositoryInjected,
             RoleRepository roleRepositoryInjected
     ) {
