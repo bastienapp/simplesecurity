@@ -9,13 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -58,8 +56,8 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
-            Authentication authentication = this.authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-            return tokenService.generateToken(authentication);
+        Authentication authentication = this.authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        return tokenService.generateToken(authentication);
     }
 }

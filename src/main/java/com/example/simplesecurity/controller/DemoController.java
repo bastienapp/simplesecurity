@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("*")
-public class SampleController {
+public class DemoController {
 
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('SCOPE_USER')")
