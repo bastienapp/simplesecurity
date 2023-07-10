@@ -22,7 +22,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 @Configuration
-// enable @PreAuthorize annotation
+// @EnableMethodSecurity enables @PreAuthorize annotation in controllers
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
