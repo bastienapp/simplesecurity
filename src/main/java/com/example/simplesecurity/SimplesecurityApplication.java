@@ -23,31 +23,33 @@ public class SimplesecurityApplication {
     @Bean
     CommandLineRunner run(UserRepository userRepository, RoleRepository roleRepository) {
 
-        return (args -> {
-            if (roleRepository.findByAuthority("ADMIN").isEmpty()) {
-                PasswordEncoder passwordEncoder
-                        = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-                Role adminRole = new Role();
-                adminRole.setAuthority("ADMIN");
-                adminRole = roleRepository.save(adminRole);
-
-                Role userRole = new Role();
-                userRole.setAuthority("USER");
-                roleRepository.save(userRole);
-
-                User user = new User();
-                user.setEmail("user@email.com");
-                user.setPassword(passwordEncoder.encode("password"));
-                user.setAuthorities(Set.of(userRole, adminRole));
-                userRepository.save(user);
-
-                User admin = new User();
-                admin.setEmail("admin@email.com");
-                admin.setPassword(passwordEncoder.encode("password"));
-                admin.setAuthorities(Set.of(adminRole));
-                userRepository.save(admin);
+        return (args) -> {
+            if (roleRepository.findByAuthority("ADMIN").isPresent()) {
+                // don't create users and roles if presents
+                return;
             }
-        });
+            PasswordEncoder passwordEncoder
+                    = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+            Role adminRole = new Role();
+            adminRole.setAuthority("ADMIN");
+            adminRole = roleRepository.save(adminRole);
+
+            Role userRole = new Role();
+            userRole.setAuthority("USER");
+            roleRepository.save(userRole);
+
+            User user = new User();
+            user.setEmail("user@email.com");
+            user.setPassword(passwordEncoder.encode("password"));
+            user.setAuthorities(Set.of(userRole, adminRole));
+            userRepository.save(user);
+
+            User admin = new User();
+            admin.setEmail("admin@email.com");
+            admin.setPassword(passwordEncoder.encode("password"));
+            admin.setAuthorities(Set.of(adminRole));
+            userRepository.save(admin);
+        };
     }
 }
