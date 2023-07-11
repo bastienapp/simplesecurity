@@ -29,6 +29,7 @@ public class SecurityConfiguration {
     @Value("${jwt.secret}")
     public String jwtSecret;
 
+    // enables AuthenticationManager injection in controller
     @Bean
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -43,6 +44,7 @@ public class SecurityConfiguration {
                     auth.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
+                // guaranties no session will be created
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
