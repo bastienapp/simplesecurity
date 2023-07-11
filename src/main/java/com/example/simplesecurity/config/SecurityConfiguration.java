@@ -30,6 +30,7 @@ public class SecurityConfiguration {
     public String jwtSecret;
 
     // enables AuthenticationManager injection in controller
+    // and usage of UserDetailsService
     @Bean
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
