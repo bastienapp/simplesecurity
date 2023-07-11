@@ -32,6 +32,13 @@ public class User implements UserDetails {
     public User() {
     }
 
+    // only used for manual creation
+    public User(String email, String password, Set<Role> authorities) {
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
     public UUID getId() {
         return id;
     }

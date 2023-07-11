@@ -20,6 +20,11 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
+    // only used for manual creation
+    public Role(String authority) {
+        this.authority = authority;
+    }
+
     public UUID getId() {
         return id;
     }

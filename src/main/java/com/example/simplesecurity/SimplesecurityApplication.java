@@ -31,24 +31,24 @@ public class SimplesecurityApplication {
             PasswordEncoder passwordEncoder
                     = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-            Role adminRole = new Role();
-            adminRole.setAuthority("ADMIN");
+            Role adminRole = new Role("ADMIN");
             adminRole = roleRepository.save(adminRole);
 
-            Role userRole = new Role();
-            userRole.setAuthority("USER");
-            roleRepository.save(userRole);
+            Role userRole = new Role("USER");
+            userRole = roleRepository.save(userRole);
 
-            User user = new User();
-            user.setEmail("user@email.com");
-            user.setPassword(passwordEncoder.encode("password"));
-            user.setAuthorities(Set.of(userRole, adminRole));
+            User user = new User(
+                    "user@email.com",
+                    passwordEncoder.encode("password"),
+                    Set.of(userRole)
+            );
             userRepository.save(user);
 
-            User admin = new User();
-            admin.setEmail("admin@email.com");
-            admin.setPassword(passwordEncoder.encode("password"));
-            admin.setAuthorities(Set.of(adminRole));
+            User admin = new User(
+                    "admin@email.com",
+                    passwordEncoder.encode("password"),
+                    Set.of(userRole, adminRole)
+            );
             userRepository.save(admin);
         };
     }
